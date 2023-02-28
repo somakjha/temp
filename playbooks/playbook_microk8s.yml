@@ -1,0 +1,26 @@
+---
+- name: Install the requirements
+  hosts: all
+  tasks:
+  - name: Install microk8s using snap
+    become: true
+    snap:
+      name: microk8s
+      state: absent
+      classic: yes
+    register: microk8s_result   
+  - name: Run a shell command and register its output as a variable
+    become: true
+    shell: |
+      usermod -a -G microk8s $USER
+      chown -f -R $USER ~/.kube
+    
+    when: microk8s_result.changed==true
+    register: foo_result
+  - name: print the shell result
+    debug:
+      var: foo_result
+  - name: print the microk8s result
+    debug:
+      var: microk8s_result
+

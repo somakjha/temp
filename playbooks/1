@@ -1,0 +1,14 @@
+---
+- name: Install the requirements
+  hosts: all
+  tasks:
+  - name: ping the hosts
+    ping:
+      data: "hi"
+  - name: Install "foo" with option --classic
+    become: true
+    become_user: root
+    snap:
+      name: microk8s
+      state: absent
+      classic: yes
