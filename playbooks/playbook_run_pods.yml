@@ -1,0 +1,9 @@
+---
+- name: run pods
+  hosts: all
+  become: true
+  tasks:
+  - name: start the DNS and create a pod
+    shell: |
+      microk8s.enable dns dashboard
+      microk8s.kubectl run nginx --image=nginx --restart=Never

@@ -1,0 +1,15 @@
+---
+- name: uninstall
+  hosts: all
+  tasks:
+  - name: uninstall microk8s
+    become: true
+    snap:
+      name: microk8s
+      state: absent
+      classic: yes
+  - name: delete microk8s group
+    become: true
+    shell: |
+      groupdel microk8s
+    
