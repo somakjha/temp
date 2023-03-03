@@ -1,0 +1,9 @@
+---
+- name: Public key is deployed to managed hosts for Ansible
+  hosts: all
+  vars:
+    yaml_content: "{{ lookup('file', '~/simple-pod.yml') }}"  
+  tasks:
+    - name: print
+      debug:
+        var: yaml_content

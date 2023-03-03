@@ -13,8 +13,9 @@
     shell: |
       usermod -a -G microk8s $USER
       chown -f -R $USER ~/.kube
-    register: shell_result  
-  - name: print the shell result
-    debug:
-      var: shell_result
+
+  - name: run the newgroup command to reflect newly added user 
+    shell: |
+      newgrp microk8s
+      
   
